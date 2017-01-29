@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+</head>
+<body>
+<h1>List of requests</h1>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>number</th>
+        <th>title</th>
+        <th>description</th>
+        <th>requestedBy</th>
+        <th>tags</th>
+    </tr>
+    <tr data-th-each="request : ${requests}">
+        <td data-th-inline="text">
+            <a th:href="@{/requests/{id}(id=${request.id})}">[[${request.excelId}]]</a>
+        </td>
+        <td data-th-text="${request.title}">...</td>
+        <td data-th-text="${request.description}">...</td>
+        <td data-th-text="${request.requestedBy.name}">...</td>
+        <td>
+            <span data-th-each="a, iterStat : ${request.tags}" data-th-text="!${iterStat.last} ? ${a.name} + ',': ${a.name}"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
